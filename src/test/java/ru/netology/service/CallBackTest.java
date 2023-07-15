@@ -21,7 +21,13 @@ public class CallBackTest {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeEach
-    void setUp() { driver = new ChromeDriver(); }
+    void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+    }
 
     @AfterEach
     void tearDown(){
@@ -31,12 +37,6 @@ public class CallBackTest {
 
     @Test
     void shouldTestV1(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Иван Иванов");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79999999999");
