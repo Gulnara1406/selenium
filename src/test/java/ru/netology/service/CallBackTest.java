@@ -3,6 +3,7 @@ package ru.netology.service;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CallBackTest {
     private WebDriver driver;
+
+    @BeforeAll
+    static void setUpAll(){
+        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
+    }
+    @BeforeEach
+    void setUp() { driver = new ChromeDriver(); }
 
     @AfterEach
     void tearDown(){
